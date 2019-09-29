@@ -10,7 +10,9 @@ class WarehousesController < ApplicationController
 
   # GET /warehouses/1
   def show
-    render json: @warehouse
+    @warehouse = Warehouse.includes(:inventories).where(id: params[:id], "inventories.damaged" => false)
+
+    render json: @warehouse[0], :include => :inventories
   end
 
   # POST /warehouses
