@@ -9,19 +9,19 @@ Welcome to the REST Assured, a JSON API service to CRUD inventories in warehouse
 3. To test the APIs for creating and updating
     response body format should be:
         - For Warehouse
-            {
+            `{
 	            "warehouse": {
 		            "name": "Jimin's New Warehouse",
 		            "location": "Somewhere in the World"
 	            }
-            }
+            }`
         - For Inventory
-            {
+           ` {
 	            "inventory": {
 		            "name": "Fixed Mattress",
 		            "default": true, 
 	            }
-            }
+            } `
 
 ## Testing
 - Run Specs via `bundle exec rspec`
