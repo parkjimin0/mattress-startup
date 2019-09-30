@@ -1,30 +1,32 @@
 class InventoriesController < ApplicationController
+  before_action :set_warehouse
   before_action :set_inventory, only: [:show, :update, :destroy]
 
-  # GET /inventories
+  # GET /warehouses/:warehouse_id/inventories to show ALL inventories (damaged and not)
   def index
-    @inventories = Inventory.all
+    @inventories = @warehouse.inventories
 
     render json: @inventories
   end
 
-  # GET /inventories/1
+  # GET /warehouses/:warehouse_id/inventories/:id
   def show
     render json: @inventory
   end
 
-  # POST /inventories
+  # POST /warehouses/:warehouse_id/inventories
   def create
-    @inventory = Inventory.new(inventory_params)
+    # byebug
+    @inventory = @warehouse.inventories.create(inventory_params)
 
     if @inventory.save
-      render json: @inventory, status: :created, location: @inventory
+      render json: @inventory, status: :created
     else
       render json: @inventory.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /inventories/1
+  # PATCH/PUT /warehouses/:warehouse_id/inventories/:id
   def update
     if @inventory.update(inventory_params)
       render json: @inventory
@@ -33,19 +35,27 @@ class InventoriesController < ApplicationController
     end
   end
 
-  # DELETE /inventories/1
+  # DELETE /warehouses/:warehouse_id/inventories/:id
   def destroy
     @inventory.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_inventory
-      @inventory = Inventory.find(params[:id])
+
+    def set_warehouse
+      @warehouse = Warehouse.find(params[:warehouse_id])
+    rescue
+      render :json => { :errors => 'Warehouse not found' }
     end
 
-    # Only allow a trusted parameter "white list" through.
+    def set_inventory
+      @inventory = Inventory.find(params[:id])
+    rescue
+      render :json => { :errors => 'Inventory not found' }
+    end
+
     def inventory_params
-      params.require(:inventory).permit(:name, :damaged, :warehouse_id)
+      # params.require(:inventory).permit(:name, :damaged, :warehouse_id)
+      params.require(:inventory).permit!
     end
 end
