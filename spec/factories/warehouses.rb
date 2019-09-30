@@ -1,8 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
-FactoryGirl.define do
+FactoryBot.define do
   factory :warehouse do
-    name "MyString"
-    location "MyString"
+    name "Test Warehouse"
+    location "Test USA"
   end
 end
