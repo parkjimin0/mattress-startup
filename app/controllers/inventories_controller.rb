@@ -16,7 +16,6 @@ class InventoriesController < ApplicationController
 
   # POST /warehouses/:warehouse_id/inventories
   def create
-    # byebug
     @inventory = @warehouse.inventories.create(inventory_params)
 
     if @inventory.save
@@ -55,7 +54,6 @@ class InventoriesController < ApplicationController
     end
 
     def inventory_params
-      # params.require(:inventory).permit(:name, :damaged, :warehouse_id)
       params.require(:inventory).permit!
     end
 end
