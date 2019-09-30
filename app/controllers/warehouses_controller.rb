@@ -41,12 +41,13 @@ class WarehousesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_warehouse
       @warehouse = Warehouse.find(params[:id])
+    rescue
+      render :json => { :errors => 'Warehouse not found' }
     end
 
-    # Only allow a trusted parameter "white list" through.
     def warehouse_params
       params.require(:warehouse).permit(:name, :location)
     end
