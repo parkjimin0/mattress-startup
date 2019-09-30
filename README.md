@@ -1,24 +1,27 @@
 # README
+Welcome to the REST Assured, a JSON API service to CRUD inventories in warehouses for mattresses.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Getting Started
 
-Things you may want to cover:
+## Development setup
+1. Seed the database to fill up your hive center: `rake db:seed` 
+2. Start to run the app: `rails server` and head to the hive center homepage/port :`localhost:3000`
+3. To test the APIs for creating and updating
+    response body format should be:
+        - For Warehouse
+            {
+	            "warehouse": {
+		            "name": "Jimin's New Warehouse",
+		            "location": "Somewhere in the World"
+	            }
+            }
+        - For Inventory
+            {
+	            "inventory": {
+		            "name": "Fixed Mattress",
+		            "default": true, 
+	            }
+            }
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Testing
+- Run Specs via `bundle exec rspec`
