@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :inventory do
-    name "MyString"
-    damaged false
-    warehouse nil
+    name { "Test Inventory" }
+    damaged { false }
+    association :warehouse
   end
 end
